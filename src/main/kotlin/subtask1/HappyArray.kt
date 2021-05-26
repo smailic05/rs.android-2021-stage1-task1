@@ -3,19 +3,14 @@ package subtask1
 class HappyArray {
 
     fun convertToHappy(sadArray: IntArray): IntArray {
-        var happyList=mutableListOf<Int>()
-        for (i in sadArray)
-            happyList.add(i)
-        var x=0
-        while (x==0) {
-            happyList=sadToHappy( happyList)
-            x=checkIfHappy(happyList)
+        var happyList = sadArray.toMutableList()
+        var condition = 0
+        while (condition == 0) {
+            happyList = sadToHappy(happyList)
+            condition = checkIfHappy(happyList)
         }
 
-        val happyArray= IntArray(happyList.size)
-        for (i in happyArray.indices)
-            happyArray[i]=happyList[i]
-        return happyArray
+        return happyList.toIntArray()
     }
 
     private fun checkIfHappy(happyList: MutableList<Int>):Int {
@@ -28,13 +23,13 @@ class HappyArray {
     }
 
     private fun sadToHappy( sadArray: MutableList<Int>): MutableList<Int> {
-        var happyList = mutableListOf<Int>()
+        val happyList = mutableListOf<Int>()
         for (i in sadArray.indices) {
             if (i != 0 && i != sadArray.size - 1) {
-
                 if (sadArray[i - 1] + sadArray[i + 1] > sadArray[i])
                     happyList.add(sadArray[i])
-            } else happyList.add(sadArray[i])
+            }
+            else happyList.add(sadArray[i])
         }
         return happyList
     }
